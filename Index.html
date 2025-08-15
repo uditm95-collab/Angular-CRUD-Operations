@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="employeeApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Management AngularJS</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <script src="app.js"></script>
+  <script src="controllers/employeeController.js"></script>
+  <script src="services/employeeService.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body ng-controller="EmployeeController">
+
+  <h1>Employee Management</h1>
+
+  <!-- Add Employee -->
+  <input type="text" ng-model="newEmployee.name" placeholder="Name">
+  <input type="text" ng-model="newEmployee.email" placeholder="Email">
+  <input type="text" ng-model="newEmployee.role" placeholder="Role">
+  <button ng-click="addEmployee()">Add Employee</button>
+
+  <hr>
+
+  <!-- Employee List -->
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+    <tr ng-repeat="employee in employees">
+      <td>{{employee.name}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.role}}</td>
+      <td>
+        <button ng-click="editEmployee(employee)">Edit</button>
+        <button ng-click="deleteEmployee(employee.id)">Delete</button>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Edit Employee -->
+  <div ng-if="editMode">
+    <h3>Edit Employee</h3>
+    <input type="text" ng-model="editableEmployee.name" placeholder="Name">
+    <input type="text" ng-model="editableEmployee.email" placeholder="Email">
+    <input type="text" ng-model="editableEmployee.role" placeholder="Role">
+    <button ng-click="updateEmployee()">Update</button>
+    <button ng-click="cancelEdit()">Cancel</button>
+  </div>
+
+</body>
+</html>
